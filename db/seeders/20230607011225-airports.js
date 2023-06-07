@@ -13,6 +13,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'DPS',
@@ -21,6 +23,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'SUB',
@@ -29,6 +33,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'UPG',
@@ -37,6 +43,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'KNO',
@@ -45,6 +53,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'JOG',
@@ -53,6 +63,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'HLP',
@@ -61,6 +73,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'CGK',
@@ -69,6 +83,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BTH',
@@ -77,6 +93,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PLM',
@@ -85,6 +103,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'SRG',
@@ -93,6 +113,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BDO',
@@ -101,6 +123,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PNK',
@@ -109,6 +133,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'LOP',
@@ -117,6 +143,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PKU',
@@ -125,6 +153,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PDG',
@@ -133,6 +163,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BDJ',
@@ -141,6 +173,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'MDC',
@@ -149,6 +183,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'TKG',
@@ -157,6 +193,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'SOC',
@@ -165,6 +203,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'DJJ',
@@ -173,6 +213,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PGK',
@@ -181,6 +223,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'KOE',
@@ -189,6 +233,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'DJB',
@@ -197,6 +243,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'SOQ',
@@ -205,6 +253,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'KDI',
@@ -213,6 +263,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'AMQ',
@@ -229,6 +281,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'MLG',
@@ -237,6 +291,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BTJ',
@@ -245,6 +301,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BKS',
@@ -253,6 +311,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'TJQ',
@@ -261,6 +321,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'TRK',
@@ -269,6 +331,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PKY',
@@ -277,6 +341,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BPN',
@@ -285,6 +351,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PKN',
@@ -293,6 +361,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'AAP',
@@ -301,6 +371,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BEJ',
@@ -309,6 +381,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'LBJ',
@@ -317,6 +391,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'SMQ',
@@ -325,6 +401,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'MKQ',
@@ -333,6 +411,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'KTG',
@@ -341,6 +421,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BMU',
@@ -349,6 +431,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'TNJ',
@@ -357,6 +441,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BIK',
@@ -365,6 +451,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'WMX',
@@ -373,6 +461,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'TTE',
@@ -381,6 +471,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'MKW',
@@ -389,6 +481,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'GNS',
@@ -397,6 +491,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BUW',
@@ -405,6 +501,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'ENE',
@@ -413,6 +511,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'GTO',
@@ -421,6 +521,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'TIM',
@@ -429,6 +531,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PEK',
@@ -437,6 +541,8 @@ module.exports = {
           country: 'China',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'DXB',
@@ -445,6 +551,8 @@ module.exports = {
           country: 'Uni Emirat Arab',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'HND',
@@ -453,6 +561,8 @@ module.exports = {
           country: 'Japan',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PVG',
@@ -461,6 +571,8 @@ module.exports = {
           country: 'China',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'DEL',
@@ -469,6 +581,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'CAN',
@@ -477,6 +591,8 @@ module.exports = {
           country: 'China',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'SIN',
@@ -485,6 +601,8 @@ module.exports = {
           country: 'Singapore',
           continent: 'Asia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'LGW',
@@ -493,6 +611,8 @@ module.exports = {
           country: 'Great Britain',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'BVA',
@@ -501,6 +621,8 @@ module.exports = {
           country: 'Prancis',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'HHN',
@@ -509,6 +631,8 @@ module.exports = {
           country: 'Jerman',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'AMS',
@@ -517,6 +641,8 @@ module.exports = {
           country: 'Belanda',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'FCO',
@@ -525,6 +651,8 @@ module.exports = {
           country: 'Italia',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'SVO',
@@ -533,6 +661,8 @@ module.exports = {
           country: 'Rusia',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'SAW',
@@ -541,6 +671,8 @@ module.exports = {
           country: 'Turki',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'ALC',
@@ -549,6 +681,8 @@ module.exports = {
           country: 'Spanyol',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'OTP',
@@ -557,6 +691,8 @@ module.exports = {
           country: 'Rumania',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'CRL',
@@ -565,6 +701,8 @@ module.exports = {
           country: 'Belgia',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'KEF',
@@ -573,6 +711,8 @@ module.exports = {
           country: 'Islandia',
           continent: 'Eropa',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'JNB',
@@ -581,6 +721,8 @@ module.exports = {
           country: 'Afrika Selatan',
           continent: 'Afrika',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'CMN',
@@ -589,6 +731,8 @@ module.exports = {
           country: 'Maroko',
           continent: 'Afrika',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'HRG',
@@ -597,6 +741,8 @@ module.exports = {
           country: 'Mesir',
           continent: 'Afrika',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'NBO',
@@ -605,6 +751,8 @@ module.exports = {
           country: 'Kenya',
           continent: 'Afrika',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'LOS',
@@ -613,6 +761,8 @@ module.exports = {
           country: 'Nigeria',
           continent: 'Afrika',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'HBA',
@@ -621,6 +771,8 @@ module.exports = {
           country: 'Australia',
           continent: 'Australia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'AAB',
@@ -629,6 +781,8 @@ module.exports = {
           country: 'Australia',
           continent: 'Australia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'WIN',
@@ -637,6 +791,8 @@ module.exports = {
           country: 'Australia',
           continent: 'Australia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'DRW',
@@ -645,6 +801,8 @@ module.exports = {
           country: 'Australia',
           continent: 'Australia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PHE',
@@ -653,6 +811,8 @@ module.exports = {
           country: 'Australia',
           continent: 'Australia',
           is_international: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {}
