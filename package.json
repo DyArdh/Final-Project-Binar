@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "create": "npx sequelize-cli db:create",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +23,7 @@
     "jsonwebtoken": "^9.0.0",
     "multer": "1.4.5-lts.1",
     "nodemailer": "^6.9.3",
+    "pg": "^8.11.0",
     "sequelize": "^6.32.0"
   },
   "devDependencies": {
