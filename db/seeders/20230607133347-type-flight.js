@@ -9,10 +9,14 @@ module.exports = {
         {
           name: 'Domestic',
           description: 'Local Flights',
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           name: 'International',
           description: 'International Flights',
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {}
