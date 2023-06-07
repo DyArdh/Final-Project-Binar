@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       baggage_capacity: DataTypes.INTEGER,
       cabin_capacity: DataTypes.INTEGER,
-      flight_entertaiment: DataTypes.BOOLEAN,
+      flight_entertainment: DataTypes.BOOLEAN,
     },
     {
       sequelize,

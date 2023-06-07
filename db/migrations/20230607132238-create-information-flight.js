@@ -15,7 +15,7 @@ module.exports = {
       cabin_capacity: {
         type: Sequelize.INTEGER
       },
-      flight_entertaiment: {
+      flight_entertainment: {
         type: Sequelize.BOOLEAN
       },
       createdAt: {

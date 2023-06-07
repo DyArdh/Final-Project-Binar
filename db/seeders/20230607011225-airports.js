@@ -77,16 +77,6 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          airport_code: 'CGK',
-          name: 'Soekarno-Hatta',
-          city: 'Jakarta',
-          country: 'Indonesia',
-          continent: 'Asia',
-          is_international: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
           airport_code: 'BTH',
           name: 'Hang Nadim',
           city: 'Batam',
@@ -273,6 +263,8 @@ module.exports = {
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           airport_code: 'PLW',
