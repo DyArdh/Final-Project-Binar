@@ -4,7 +4,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert(
-      'InformationFlights',
+      'Information_Flights',
       [
         {
           baggage_capacity: '20 kg',
@@ -37,6 +37,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('InformationFlights', null, {});
+    await queryInterface.bulkDelete('Information_Flights', null, {});
   },
 };
