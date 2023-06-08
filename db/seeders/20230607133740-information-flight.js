@@ -47,6 +47,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Information_Flights', null, {});
+    await queryInterface.bulkDelete('Information_Flights', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
   },
 };

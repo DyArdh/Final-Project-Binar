@@ -812,6 +812,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('airports', null, {});
+    await queryInterface.bulkDelete('Airports', null, {
+      truncate: true,
+      cascade: true,
+      restartIdentity: true,
+    });
   },
 };
