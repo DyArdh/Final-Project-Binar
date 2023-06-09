@@ -339,7 +339,7 @@ module.exports = {
         {
           airport_code: 'BPN',
           name: 'Sultan Aji Muhammad Sulaiman',
-          city: '	Balikpapan',
+          city: 'Balikpapan',
           country: 'Indonesia',
           continent: 'Asia',
           is_international: false,

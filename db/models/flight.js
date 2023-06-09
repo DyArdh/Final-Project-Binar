@@ -28,15 +28,15 @@ module.exports = (sequelize, DataTypes) => {
 
       // relasi one-to-many -> airport
       Flight.belongsTo(models.Airport, {
-        foreignKey: 'departure_airport_id',
+        foreignKey: 'departure_airport_code',
         as: 'departure_airport',
       });
       Flight.belongsTo(models.Airport, {
-        foreignKey: 'arrival_airport_id',
+        foreignKey: 'arrival_airport_code',
         as: 'arrival_airport',
       });
       Flight.belongsTo(models.Airport, {
-        foreignKey: 'transit_airport_id',
+        foreignKey: 'transit_airport_code',
         as: 'transit_airport',
       });
 
@@ -53,9 +53,9 @@ module.exports = (sequelize, DataTypes) => {
       flight_number: DataTypes.STRING,
       duration: DataTypes.INTEGER,
       airline_id: DataTypes.INTEGER,
-      departure_airport_id: DataTypes.INTEGER,
-      arrival_airport_id: DataTypes.INTEGER,
-      transit_airport_id: DataTypes.INTEGER,
+      departure_airport_code: DataTypes.STRING,
+      arrival_airport_code: DataTypes.STRING,
+      transit_airport_code: DataTypes.STRING,
       return_flight_id: DataTypes.INTEGER,
       information_flights_id: DataTypes.INTEGER,
       type_flight_id: DataTypes.INTEGER,
