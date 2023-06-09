@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // relasi many-to-many -> class
       Airline.belongsToMany(models.Class, {
         foreignKey: 'airline_id',
-        as: 'airlines',
+        as: 'class',
         through: models.Class_Airline,
       });
 
