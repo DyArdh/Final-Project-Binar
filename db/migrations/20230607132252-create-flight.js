@@ -7,58 +7,58 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       schedule_departure: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       schedule_arrive: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       departure_terminal: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       flight_number: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       duration: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       airline_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
-      departure_airport_id: {
-        type: Sequelize.INTEGER
+      departure_airport_code: {
+        type: Sequelize.STRING,
       },
-      arrival_airport_id: {
-        type: Sequelize.INTEGER
+      arrival_airport_code: {
+        type: Sequelize.STRING,
       },
-      transit_airport_id: {
-        type: Sequelize.INTEGER
+      transit_airport_code: {
+        type: Sequelize.STRING,
       },
       return_flight_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       information_flights_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       type_flight_id: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Flights');
-  }
+  },
 };
