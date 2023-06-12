@@ -6,6 +6,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { rateLimit } = require('express-rate-limit');
+const cookieparser = require('cookie-parser');
 
 // local
 const { notFoundHandler, errorHandler, limiterHandler } = require('./middleware');
@@ -19,7 +20,10 @@ app.use(rateLimit(limiterHandler));
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieparser());
 app.use(morgan('dev'));
+app.set('view engine', 'ejs');
 
 // router
 app.use(indexRouter);
