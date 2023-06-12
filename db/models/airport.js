@@ -10,21 +10,21 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // relasi one-to-many -> flight
       Airport.hasMany(models.Flight, {
-        foreignKey: 'departure_airport_id',
+        foreignKey: 'departure_airport_code',
         as: 'flights_departure',
       });
       Airport.hasMany(models.Flight, {
-        foreignKey: 'arrival_airport_id',
+        foreignKey: 'arrival_airport_code',
         as: 'flights_arrival',
-      });
-      Airport.hasMany(models.Flight, {
-        foreignKey: 'transit_airport_id',
-        as: 'flights_transit',
       });
     }
   }
   Airport.init(
     {
+      airport_code: {
+        primaryKey: true,
+        type: DataTypes.STRING,
+      },
       name: DataTypes.STRING,
       continent: DataTypes.STRING,
       city: DataTypes.STRING,

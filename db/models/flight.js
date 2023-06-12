@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Flight.hasMany(models.Booking, { foreignKey: 'flight_id', as: 'bookings' });
 
       // relasi one-to-one -> type_flight
-      Flight.hasOne(models.Type_Flight, { foreignKey: 'type_flight_id', as: 'type_flight' });
+      Flight.belongsTo(models.Type_Flight, { foreignKey: 'type_flight_id', as: 'type_flight' });
 
       // relasi one-to-many -> information_flight
       Flight.belongsTo(models.Information_Flight, {
@@ -35,27 +35,27 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'arrival_airport_code',
         as: 'arrival_airport',
       });
-      Flight.belongsTo(models.Airport, {
-        foreignKey: 'transit_airport_code',
-        as: 'transit_airport',
-      });
 
       // relasi one-to-many(spesial) own
       Flight.belongsTo(models.Flight, { foreignKey: 'return_flight_id', as: 'return_flight' });
+
+      // relasi one-to-one -> class
+      Flight.belongsTo(models.Class, { foreignKey: 'class_id', as: 'class' });
     }
   }
   Flight.init(
     {
-      schedule_departure: DataTypes.DATE,
-      schedule_arrive: DataTypes.DATE,
+      departure_time: DataTypes.TIME,
+      arrival_time: DataTypes.TIME,
+      departure_date: DataTypes.DATEONLY,
+      arrival_date: DataTypes.DATEONLY,
       price: DataTypes.INTEGER,
-      departure_terminal: DataTypes.STRING,
       flight_number: DataTypes.STRING,
-      duration: DataTypes.INTEGER,
+      class_id: DataTypes.INTEGER,
+      duration: DataTypes.STRING,
       airline_id: DataTypes.INTEGER,
       departure_airport_code: DataTypes.STRING,
       arrival_airport_code: DataTypes.STRING,
-      transit_airport_code: DataTypes.STRING,
       return_flight_id: DataTypes.INTEGER,
       information_flights_id: DataTypes.INTEGER,
       type_flight_id: DataTypes.INTEGER,
