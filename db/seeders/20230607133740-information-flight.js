@@ -8,7 +8,7 @@ module.exports = {
       [
         {
           baggage_capacity: 20,
-          cabin_capacity: 0,
+          cabin_capacity: 10,
           flight_entertainment: true,
           createdAt: new Date(),
           updatedAt: new Date(),

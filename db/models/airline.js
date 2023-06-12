@@ -8,13 +8,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // relasi many-to-many -> class
-      Airline.belongsToMany(models.Class, {
-        foreignKey: 'airline_id',
-        as: 'class',
-        through: models.Class_Airline,
-      });
-
       // relasi one-to-many -> flight
       Airline.hasMany(models.Flight, { foreignKey: 'airline_id', as: 'flights' });
     }
