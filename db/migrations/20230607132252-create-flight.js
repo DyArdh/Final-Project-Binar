@@ -9,11 +9,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      schedule_departure: {
-        type: Sequelize.DATE,
+      departure_time: {
+        type: Sequelize.TIME,
       },
-      schedule_arrive: {
-        type: Sequelize.DATE,
+      arrival_time: {
+        type: Sequelize.TIME,
+      },
+      departure_date: {
+        type: Sequelize.DATEONLY,
+      },
+      arrival_date: {
+        type: Sequelize.DATEONLY,
       },
       price: {
         type: Sequelize.INTEGER,
@@ -24,8 +30,11 @@ module.exports = {
       flight_number: {
         type: Sequelize.STRING,
       },
-      duration: {
+      class_id: {
         type: Sequelize.INTEGER,
+      },
+      duration: {
+        type: Sequelize.STRING,
       },
       airline_id: {
         type: Sequelize.INTEGER,
@@ -34,9 +43,6 @@ module.exports = {
         type: Sequelize.STRING,
       },
       arrival_airport_code: {
-        type: Sequelize.STRING,
-      },
-      transit_airport_code: {
         type: Sequelize.STRING,
       },
       return_flight_id: {
