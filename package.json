@@ -9,6 +9,7 @@
     "create": "npx sequelize-cli db:create",
     "migrate": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all",
+    "flights": "node utils/lib/generate-flight.js",
     "lint": "eslint ."
   },
   "keywords": [],

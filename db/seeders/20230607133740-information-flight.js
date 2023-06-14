@@ -3,47 +3,17 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert(
-      'Information_Flights',
-      [
-        {
-          baggage_capacity: 20,
-          cabin_capacity: 10,
-          flight_entertainment: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          baggage_capacity: 21,
-          cabin_capacity: 15,
-          flight_entertainment: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          baggage_capacity: 30,
-          cabin_capacity: 12,
-          flight_entertainment: true,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          baggage_capacity: 50,
-          cabin_capacity: 10,
-          flight_entertainment: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          baggage_capacity: 50,
-          cabin_capacity: 20,
-          flight_entertainment: false,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
-      {}
-    );
+    // setup data
+    const informationsRaw = require('./data/informastionFlights.json');
+    const informations = informationsRaw.map((information) => {
+      return {
+        ...information,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+    });
+
+    await queryInterface.bulkInsert('Information_Flights', informations, {});
   },
 
   async down(queryInterface, Sequelize) {
