@@ -11,6 +11,8 @@ const {
 module.exports = {
   getFlights: async () => {
     const flights = await Flight.findAll({
+      limit: 100,
+      order: [['id', 'DESC']],
       include: [
         {
           model: Information_Flight,
