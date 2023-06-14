@@ -169,8 +169,13 @@ module.exports = {
 
       // if isActive true
       // gen refresh token and access token
-      const accessToken = generateToken({ email: user.email }, '10m');
-      const refreshToken = generateToken({ email: user.email }, '1d', REFRESH_SECRET_KEY);
+      const accessToken = generateToken({ id: user.id, email: user.email }, '10m');
+      const refreshToken = generateToken(
+        { id: user.id, email: user.email },
+        '1d',
+        // eslint-disable-next-line comma-dangle
+        REFRESH_SECRET_KEY
+      );
 
       // assigning refresh token in http-only cookie
       res.cookie('authorization', refreshToken, {

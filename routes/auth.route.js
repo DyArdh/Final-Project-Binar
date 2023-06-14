@@ -10,7 +10,7 @@ router.post('/reset-request', authController.resetPasswordRequest);
 router.post('/reset-password', authController.resetPassword);
 
 // otp
-router.post('/otp-verify', authController.verifiedOTP);
+router.post('/otp/verify', authController.verifiedOTP);
 router.get('/otp/resend', authController.resendOTP);
 
 module.exports = router;
