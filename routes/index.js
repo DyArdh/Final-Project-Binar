@@ -7,6 +7,7 @@ const authRouter = require('./auth.route');
 const airportRouter = require('./airport.route');
 const airlinesRouter = require('./airlines.route');
 const flightsRouter = require('./flight.route');
+const notifsRouter = require('./notif.route');
 const usersRouter = require('./user.route');
 
 // middleware
@@ -23,6 +24,9 @@ router.use('/airlines', airlinesRouter);
 
 // flight route
 router.use('/flights', flightsRouter);
+
+// notif
+router.use('/notifications', authMiddleware, notifsRouter);
 
 // user route
 router.use('/user', authMiddleware, usersRouter);
