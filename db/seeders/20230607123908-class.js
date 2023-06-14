@@ -3,36 +3,16 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert(
-      'Classes',
-      [
-        {
-          name: 'Economy',
-          seat_capacity: 64,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: 'Premium Economy',
-          seat_capacity: 64,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: 'Business',
-          seat_capacity: 64,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: 'First Class',
-          seat_capacity: 64,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      ],
-      {}
-    );
+    // setup data
+    const classesRaw = require('./data/classes.json');
+    const classes = classesRaw.map((classData) => {
+      return {
+        ...classData,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+    });
+    await queryInterface.bulkInsert('Classes', classes, {});
   },
 
   async down(queryInterface, Sequelize) {
