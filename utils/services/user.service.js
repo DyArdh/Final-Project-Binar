@@ -22,6 +22,25 @@ module.exports = {
     return user;
   },
 
+  getUserById: async (id) => {
+    const user = await User.findOne({
+      attributes: [
+        'id',
+        'name',
+        'email',
+        'is_active',
+        'is_google',
+        'otp',
+        'phone',
+        'role',
+        'activation_exp',
+      ],
+      where: { id },
+    });
+
+    return user;
+  },
+
   createUser: async (data) => {
     const user = await User.create(data);
 
