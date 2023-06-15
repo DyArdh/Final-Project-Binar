@@ -2,6 +2,6 @@ const router = require('express').Router();
 
 const flightController = require('../controllers/flight.controller');
 
-router.get('/', flightController.getFlights);
+router.post('/oneway', flightController.getFlightByFilter);
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { getAirlines, getAirline } = require('../utils/services/airlines.service');
+const { getAirlines, getAirline } = require('../utils/services/airline.service');
 
 module.exports = {
   getAirlines: async (req, res, next) => {

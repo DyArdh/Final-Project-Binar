@@ -5,7 +5,7 @@ const router = require('express').Router();
 // router
 const authRouter = require('./auth.route');
 const airportRouter = require('./airport.route');
-const airlinesRouter = require('./airlines.route');
+const airlinesRouter = require('./airline.route');
 const flightsRouter = require('./flight.route');
 const notifsRouter = require('./notif.route');
 const usersRouter = require('./user.route');
