@@ -169,9 +169,9 @@ module.exports = {
 
       // if isActive true
       // gen refresh token and access token
-      const accessToken = generateToken({ id: user.id, email: user.email }, '10m');
+      const accessToken = generateToken({ id: user.id, email: user.email, name: user.name }, '10m');
       const refreshToken = generateToken(
-        { id: user.id, email: user.email },
+        { id: user.id, email: user.email, name: user.name },
         '1d',
         // eslint-disable-next-line comma-dangle
         REFRESH_SECRET_KEY
@@ -323,8 +323,8 @@ module.exports = {
         await updateUserByEmail(user.email, { is_active: true });
 
         // send email
-        const htmlOtp = await nodemailerLib.getHtml('welcome-message.ejs', {});
-        nodemailerLib.sendEmail(user.email, 'Welcome to SkyPass!', htmlOtp);
+        const htmlWelcome = await nodemailerLib.getHtml('welcome-message.ejs', {});
+        nodemailerLib.sendEmail(user.email, 'Welcome to SkyPass!', htmlWelcome);
 
         // delete cookies
         res.clearCookie('verifiedToken');

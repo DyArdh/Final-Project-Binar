@@ -1,13 +1,30 @@
+// cache
+const NodeCache = require('node-cache');
+
+const cache = new NodeCache({ stdTTL: 259200 });
 const { getAirlines, getAirline } = require('../utils/services/airline.service');
 
 module.exports = {
   getAirlines: async (req, res, next) => {
     try {
+      // setting cache
+      const cachedData = cache.get(req.url);
+
+      if (cachedData) {
+        return res.status(200).json({
+          status: true,
+          message: 'success!',
+          data: cachedData,
+        });
+      }
+
+      // set data to cache
       const airlines = await getAirlines();
+      cache.set(req.url, airlines);
 
       return res.status(200).json({
         status: true,
-        message: 'success',
+        message: 'success!',
         data: { airlines },
       });
     } catch (error) {
