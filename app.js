@@ -13,7 +13,7 @@ const { notFoundHandler, errorHandler, limiterHandler } = require('./middleware'
 const indexRouter = require('./routes');
 
 const app = express();
-const { DEV_PORT } = process.env;
+const { PORT } = process.env;
 
 // middlewares
 app.use(rateLimit(limiterHandler));
@@ -32,7 +32,7 @@ app.use(indexRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-app.listen(DEV_PORT || 4000, () => {
+app.listen(PORT || 3000, '0.0.0.0', () => {
   // eslint-disable-next-line no-console
-  console.log(`Running on port ${DEV_PORT || 4000}`);
+  console.log(`Running on port ${PORT || 3000}`);
 });
