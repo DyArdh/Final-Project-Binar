@@ -7,6 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: Development
 
     steps:
       - name: Checkout
@@ -26,10 +27,16 @@ jobs:
       - name: Install sequelize-cli
         run: npm i -g sequelize-cli
 
+      - name: Migrate Database
+        run: npx sequelize-cli db:migrate
+        env:
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_USERNAME: ${{ secrets.USERNAME }}
+
       - name: Deploy
         run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_DEV_TOKEN }}
-
-      - name: Install sequelize-cli
-        run: npx sequelize-cli db:migrate
