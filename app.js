@@ -32,7 +32,7 @@ app.use(indexRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-app.listen(DEV_PORT || 3000, '0.0.0.0', () => {
+app.listen(DEV_PORT || 4000, () => {
   // eslint-disable-next-line no-console
-  console.log(`Running at ${DEV_PORT || 3000}`);
+  console.log(`Running on port ${DEV_PORT || 4000}`);
 });
