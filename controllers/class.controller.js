@@ -3,11 +3,10 @@ const NodeCache = require('node-cache');
 
 const cache = new NodeCache({ stdTTL: 259200 });
 
-// require
-const { getAirports } = require('../utils/services/airport.service');
+const { getAllClass } = require('../utils/services/class.service');
 
 module.exports = {
-  index: async (req, res, next) => {
+  getAllClass: async (req, res, next) => {
     try {
       // setting cache
       const cachedData = cache.get(req.url);
@@ -16,20 +15,19 @@ module.exports = {
         return res.status(200).json({
           status: true,
           message: 'success!',
-          data: { airports: cachedData },
+          data: {
+            classes: cachedData,
+          },
         });
       }
-
       // set data to cache
-      const airports = await getAirports();
-      cache.set(req.url, airports);
+      const classes = await getAllClass();
+      cache.set(req.url, classes);
 
       return res.status(200).json({
-        status: true,
-        message: 'success!',
-        data: {
-          airports,
-        },
+        statu: true,
+        message: 'success',
+        data: { classes },
       });
     } catch (error) {
       next(error);

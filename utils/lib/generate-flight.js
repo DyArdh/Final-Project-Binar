@@ -2,7 +2,8 @@
 const moment = require('moment-timezone');
 
 // data schedule
-const flightData = require('../../db/seeders/data/schedules.json');
+const flightDataRaw = require('../../db/seeders/data/schedules.json');
+const flightData = flightDataRaw.slice(0, process.env.FLIGHT_TOTAL || flightDataRaw.length);
 const { isValidYear, isValidMonth, getDatesOfMonth } = require('./moment.lib');
 const { Flight } = require('../../db/models');
 
