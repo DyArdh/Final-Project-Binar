@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Global Styles */
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Container */
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+      }
+
+      /* Header */
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        margin-top: 10px;
+        color: #00a2ff; /* Warna utama SkyPass */
+      }
+
+      /* Content */
+      .content {
+        margin-bottom: 40px;
+      }
+
+      .card {
+        background-color: #f2f2f2;
+        padding: 20px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333333;
+      }
+
+      p {
+        margin-bottom: 10px;
+        color: #666666;
+      }
+
+      ul {
+        margin-bottom: 20px;
+        padding-left: 20px;
+        color: #666666;
+      }
+
+      .highlight {
+        font-weight: bold;
+        color: #ff6600; /* Warna highlight yang berbeda */
+      }
+
+      /* Signature */
+      .signature {
+        text-align: center;
+        margin-top: 20px;
+        color: #666666;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        color: #999999;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 style="color: #00a2ff">SkyPass</h1>
+      </div>
+
+      <div class="content">
+        <h2>Booking Confirmation</h2>
+        <p>Dear <%= user.name %>,</p>
+        <p>
+          Thank you for choosing SkyPass for your flight booking. We are excited to confirm your
+          reservation!
+        </p>
+        <p>
+          Please complete your payment before <span class="highlight"><%= user.exp %></span>.
+          Otherwise, your booking will be released.
+        </p>
+        <div class="card">
+          <h3>Booking Details:</h3>
+          <ul>
+            <li>
+              <strong>Booking Code:</strong> <span class="highlight"><%= user.bookingCode %></span>
+            </li>
+            <li><strong>Total Price:</strong> <span class="highlight"><%= user.total %></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="signature">
+        <p>
+          Best Regards,<br />
+          The SkyPass Team
+        </p>
+      </div>
+
+      <div class="footer">
+        <p>&copy; <%= new Date().getFullYear() %> SkyPass. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+</html>

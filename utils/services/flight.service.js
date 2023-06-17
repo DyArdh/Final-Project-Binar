@@ -1,9 +1,10 @@
 /* eslint-disable no-param-reassign */
+const { Flight } = require('../../db/models');
 const { op, queryTypes } = require('../../external/database');
 
 module.exports = {
   getFlightByFilter: async (data, sort, type) => {
-    const { from, to, departure, totalPassanger = 0 } = data;
+    const { from, to, departure, totalPassanger = 0, classId } = data;
 
     if (!type) type = 'departure';
     if (!sort) sort = 'asc';
@@ -16,9 +17,9 @@ module.exports = {
       FROM
         "Flights"
         LEFT JOIN "Bookings" b ON "Flights".id = b.flight_id
-        LEFT JOIN "Passangers" p ON b.id = p.booking_id
+        LEFT JOIN "Passengers" p ON b.booking_code = p.booking_code
       WHERE
-        p.passanger_type <> 'baby'
+        p.passenger_type <> 'baby'
       GROUP BY
         "Flights".id
     )
@@ -68,7 +69,8 @@ module.exports = {
         departure_airport.airport_code = '${from}' and
         arrival_airport.airport_code = '${to}' and
         "Flights".departure_date >= '${departure}' and
-        classes.seat_capacity - COALESCE(purchased_passengers.total_passengers, 0) > ${totalPassanger}
+        classes.seat_capacity - COALESCE(purchased_passengers.total_passengers, 0) > ${totalPassanger} and
+        "Flights".class_id = '${classId}'
     `;
 
     if (type === 'price') query += `ORDER BY "Flights".price ${sort}`;
@@ -84,5 +86,11 @@ module.exports = {
     const flights = result.map((flight) => flight);
 
     return flights;
+  },
+
+  getFlightById: async (flightId) => {
+    const flight = await Flight.findOne({ where: { id: flightId } });
+
+    return flight;
   },
 };
