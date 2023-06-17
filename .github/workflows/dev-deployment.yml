@@ -7,7 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: Development
 
     steps:
       - name: Checkout
@@ -21,20 +20,19 @@ jobs:
       - name: Install packages
         run: npm install
 
-      - name: Install Railway
-        run: npm i -g @railway/cli
-
-      - name: Install sequelize-cli
-        run: npm i -g sequelize-cli
+      - name: Set up environment
+        run: |
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DEV_DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DEV_DB_PORT }}" >> $GITHUB_ENV
+          echo "DB_HOST=${{ secrets.DEV_DB_HOST }}" >> $GITHUB_ENV
 
       - name: Migrate Database
-        run: npx sequelize-cli db:migrate
-        env:
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_USERNAME: ${{ secrets.USERNAME }}
+        run: npm run migrate
+
+      - name: Install Railway
+        run: npm i -g @railway/cli
 
       - name: Deploy
         run: railway up
