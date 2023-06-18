@@ -366,8 +366,11 @@ module.exports = {
           });
         }
 
+        // get user
+        const user = await getUserByEmailOrPhone(decodedToken.email);
+
         // generate new access token
-        const accessToken = generateToken({ email: decodedToken.email }, '10m');
+        const accessToken = generateToken({ id: user.id, email: decodedToken.email }, '10m');
 
         return res.status(200).json({
           status: true,
