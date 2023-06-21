@@ -4,7 +4,7 @@ const registerValidationSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().email().required(),
   phone: Joi.string()
-    .pattern(/^[0-9]{10,12}$/)
+    .pattern(/^[0-9]{10,13}$/)
     .required()
     .messages({
       'string.base': 'Phone number must be a string',
