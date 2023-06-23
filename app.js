@@ -17,7 +17,13 @@ const { PORT } = process.env;
 
 // middlewares
 app.use(rateLimit(limiterHandler));
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FE_ORIGIN || 'http://localhost:3000',
+    credentials: true,
+    // eslint-disable-next-line comma-dangle
+  })
+);
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
