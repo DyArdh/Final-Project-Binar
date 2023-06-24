@@ -230,7 +230,6 @@ module.exports = {
         const updateVerifiedToken = generateToken({ email: user.email }, '10m');
 
         // the token is sent directly to the client
-
         return res.status(200).json({
           status: true,
           message: 'success!',
