@@ -407,13 +407,15 @@ module.exports = {
       const resetToken = generateToken({ email: user.email, userId: user.id }, '10m');
       const expiredDate = new Date(Date.now() + 10 * 60000);
       const uri = 'http://localhost:3000/reset-password';
+      const URL_RESET = process.env.RESETPW_URL
+        ? `${process.env.RESETPW_URL}?token=${resetToken}`
+        : `${uri}?token=${resetToken}`;
 
       // html
       const htmlReset = await nodemailerLib.getHtml('reset-password-message.ejs', {
         user: {
           name: user.name,
-          resetLink:
-            `${process.env.RESETPW_URL}?token=${resetToken}` || `${uri}?token=${resetToken}`,
+          resetLink: URL_RESET,
         },
       });
 
@@ -425,10 +427,14 @@ module.exports = {
         if (currentTime < resetTokenExist.exp) {
           // just send email but not update token
           const { token } = resetTokenExist;
+          const URL_RESET_OLD = process.env.RESETPW_URL
+            ? `${process.env.RESETPW_URL}?token=${token}`
+            : `${uri}?token=${token}`;
+
           const htmlResetNotUpdate = await nodemailerLib.getHtml('reset-password-message.ejs', {
             user: {
               name: user.name,
-              resetLink: `${process.env.RESETPW_URL}?token=${token}` || `${uri}?token=${token}`,
+              resetLink: URL_RESET_OLD,
             },
           });
           nodemailerLib.sendEmail(user.email, 'Reset Password Request', htmlResetNotUpdate);
