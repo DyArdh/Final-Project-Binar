@@ -16,6 +16,9 @@ const resetPasswordValidationSchema = Joi.object({
     'any.only': 'passwords do not match',
     'any.required': 'confirm_password is required',
   }),
+  resetRequestToken: Joi.string().optional().messages({
+    'string.base': 'verifiedToken must be a string',
+  }),
 });
 
 module.exports = resetPasswordValidationSchema;

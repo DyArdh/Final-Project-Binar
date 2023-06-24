@@ -9,6 +9,9 @@ const otpValidationSchema = Joi.object({
     'number.max': 'OTP must be up to 6 digits',
     'any.required': 'OTP is required',
   }),
+  verifiedToken: Joi.string().optional().messages({
+    'string.base': 'verifiedToken must be a string',
+  }),
 });
 
 module.exports = otpValidationSchema;

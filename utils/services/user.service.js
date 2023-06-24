@@ -94,4 +94,11 @@ module.exports = {
 
     return resetToken;
   },
+
+  updateResetTokenExp: async (token) => {
+    const expirationDate = new Date('2020-01-01');
+    const resetToken = await Reset_Password.update({ exp: expirationDate }, { where: { token } });
+
+    return resetToken;
+  },
 };
