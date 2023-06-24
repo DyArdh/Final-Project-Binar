@@ -406,8 +406,15 @@ module.exports = {
       // create reset password token and exp
       const resetToken = generateToken({ email: user.email, userId: user.id }, '10m');
       const expiredDate = new Date(Date.now() + 10 * 60000);
+      const uri = 'http://localhost:3000/reset-password';
+
+      // html
       const htmlReset = await nodemailerLib.getHtml('reset-password-message.ejs', {
-        user: { name: user.name, resetLink: process.env.RESETPW_URL || 'google.com' },
+        user: {
+          name: user.name,
+          resetLink:
+            `${process.env.RESETPW_URL}?token=${resetToken}` || `${uri}?token=${resetToken}`,
+        },
       });
 
       // if reset password token exist and not expired
@@ -417,19 +424,20 @@ module.exports = {
         const currentTime = new Date();
         if (currentTime < resetTokenExist.exp) {
           // just send email but not update token
-          nodemailerLib.sendEmail(user.email, 'Reset Password Request', htmlReset);
-
-          // set cookie
-          const currentTimeReset = new Date().getTime();
+          const { token } = resetTokenExist;
+          const htmlResetNotUpdate = await nodemailerLib.getHtml('reset-password-message.ejs', {
+            user: {
+              name: user.name,
+              resetLink: `${process.env.RESETPW_URL}?token=${token}` || `${uri}?token=${token}`,
+            },
+          });
+          nodemailerLib.sendEmail(user.email, 'Reset Password Request', htmlResetNotUpdate);
 
           // the token is sent directly to the client
           return res.status(202).json({
             status: true,
             message: 'link to reset password has been sent to the email client!',
-            data: {
-              resetRequest: resetTokenExist.token,
-              exp: resetTokenExist.exp - currentTimeReset,
-            },
+            data: null,
           });
         }
       }
@@ -444,9 +452,7 @@ module.exports = {
       return res.status(200).json({
         status: true,
         message: 'link to reset password has been sent to the email client!',
-        data: {
-          resetRequest: resetToken,
-        },
+        data: null,
       });
     } catch (error) {
       next(error);
