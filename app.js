@@ -38,7 +38,7 @@ app.use(indexRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-app.listen(PORT || 3000, '0.0.0.0', () => {
+app.listen(PORT || 8080, '0.0.0.0', () => {
   // eslint-disable-next-line no-console
-  console.log(`Running on port ${PORT || 3000}`);
+  console.log(`Running on port ${PORT || 8080}`);
 });
