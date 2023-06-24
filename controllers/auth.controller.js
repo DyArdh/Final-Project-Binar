@@ -86,18 +86,13 @@ module.exports = {
       // create token for verified otp (10 minutes)
       const verifiedToken = generateToken({ email }, '10m');
 
-      // set verified token to cookie
-      res.cookie('verifiedToken', verifiedToken, {
-        httpOnly: true,
-        sameSite: 'none',
-        secure: true,
-        maxAge: 10 * 60 * 1000,
-      });
-
+      // the token is sent directly to the client
       return res.status(201).json({
         status: true,
         message: 'user created!',
-        data: null,
+        data: {
+          verifiedToken,
+        },
       });
     } catch (error) {
       next(error);
@@ -154,24 +149,19 @@ module.exports = {
         // update user
         await updateUserByEmail(user.email, { activation_exp: expiredDate });
 
-        // set verified token to cookie
-        res.cookie('verifiedToken', verifiedToken, {
-          httpOnly: true,
-          sameSite: 'none',
-          secure: true,
-          maxAge: 10 * 60 * 1000,
-        });
-
+        // the token is sent directly to the client
         return res.status(403).json({
           status: false,
           message: 'Please verified your account first!',
-          data: null,
+          data: {
+            verifiedToken,
+          },
         });
       }
 
       // if isActive true
       // gen refresh token and access token
-      const accessToken = generateToken({ id: user.id, email: user.email, name: user.name }, '10m');
+      const accessToken = generateToken({ id: user.id, email: user.email, name: user.name }, '1h'); // change access token to 1 hour
       const refreshToken = generateToken(
         { id: user.id, email: user.email, name: user.name },
         '1d',
@@ -179,18 +169,13 @@ module.exports = {
         REFRESH_SECRET_KEY
       );
 
-      // assigning refresh token in http-only cookie
-      res.cookie('authorization', refreshToken, {
-        httpOnly: true,
-        // sameSite: 'Lax',
-        maxAge: 24 * 60 * 60 * 1000,
-      });
-
+      // the token is sent directly to the client
       return res.status(200).json({
         status: true,
         message: 'success!',
         data: {
           access_token: accessToken,
+          refres_token: refreshToken,
         },
       });
     } catch (error) {
@@ -244,17 +229,14 @@ module.exports = {
         // create token for verified otp (10 minutes)
         const updateVerifiedToken = generateToken({ email: user.email }, '10m');
 
-        // set verified token to cookie
-        res.cookie('verifiedToken', updateVerifiedToken, {
-          httpOnly: true,
-          // sameSite: 'Lax',
-          maxAge: 10 * 60 * 1000,
-        });
+        // the token is sent directly to the client
 
         return res.status(200).json({
           status: true,
           message: 'success!',
-          data: null,
+          data: {
+            verifiedToken: updateVerifiedToken,
+          },
         });
       }
 
@@ -436,7 +418,7 @@ module.exports = {
       const resetToken = generateToken({ email: user.email }, '10m');
       const expiredDate = new Date(Date.now() + 10 * 60000);
       const htmlReset = await nodemailerLib.getHtml('reset-password-message.ejs', {
-        user: { name: user.name, resetLink: 'hello.com' },
+        user: { name: user.name, resetLink: process.env.RESETPW_URL || 'google.com' },
       });
 
       // if reset password token exist and not expired
@@ -451,16 +433,14 @@ module.exports = {
           // set cookie
           const currentTimeReset = new Date().getTime();
 
-          res.cookie('resetRequest', resetTokenExist.token, {
-            httpOnly: true,
-            // sameSite: 'Lax',
-            maxAge: resetTokenExist.exp - currentTimeReset,
-          });
-
+          // the token is sent directly to the client
           return res.status(200).json({
             status: true,
             message: 'link to reset password has been sent to the email client!',
-            data: null,
+            data: {
+              resetRequest: resetTokenExist.token,
+              exp: resetTokenExist.exp - currentTimeReset,
+            },
           });
         }
       }
@@ -471,17 +451,13 @@ module.exports = {
       // send email
       nodemailerLib.sendEmail(user.email, 'Reset Password Request', htmlReset);
 
-      // set reset token to cookie
-      res.cookie('resetRequest', resetToken, {
-        httpOnly: true,
-        // sameSite: 'Lax',
-        maxAge: 10 * 60 * 1000,
-      });
-
+      // the token is sent directly to the client
       return res.status(200).json({
         status: true,
         message: 'link to reset password has been sent to the email client!',
-        data: null,
+        data: {
+          resetRequest: resetToken,
+        },
       });
     } catch (error) {
       next(error);

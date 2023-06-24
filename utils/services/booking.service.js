@@ -2,6 +2,7 @@
 /* eslint-disable operator-linebreak */
 /* eslint-disable comma-dangle */
 const moment = require('moment-timezone');
+const { Op } = require('sequelize');
 const { Booking } = require('../../db/models');
 const bookingModelSchema = require('../validations/bookingModel.schema');
 const { op, queryTypes } = require('../../external/database');
@@ -175,5 +176,26 @@ module.exports = {
     const bookings = await op.query(query, { bind: params, type: queryTypes.SELECT });
 
     return bookings;
+  },
+  getAllExpBookings: async () => {
+    const currentDate = new Date();
+    const bookings = await Booking.findAll({
+      where: {
+        exp: { [Op.lt]: currentDate },
+        status: 'Unpaid',
+        payment_status: false,
+      },
+    });
+
+    return bookings;
+  },
+
+  cancelBooking: async (bookingCode) => {
+    const booking = await Booking.update(
+      { status: 'Cancelled' },
+      { where: { booking_code: bookingCode } }
+    );
+
+    return booking;
   },
 };
