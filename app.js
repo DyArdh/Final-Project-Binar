@@ -19,7 +19,7 @@ const { PORT } = process.env;
 app.use(rateLimit(limiterHandler));
 app.use(
   cors({
-    origin: 'http://localhost:3000' || process.env.FE_ORIGIN,
+    origin: process.env.FE_ORIGIN || 'http://localhost:3000',
     credentials: true,
     // eslint-disable-next-line comma-dangle
   })

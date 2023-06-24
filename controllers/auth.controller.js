@@ -89,7 +89,8 @@ module.exports = {
       // set verified token to cookie
       res.cookie('verifiedToken', verifiedToken, {
         httpOnly: true,
-        sameSite: 'Lax',
+        sameSite: 'none',
+        secure: true,
         maxAge: 10 * 60 * 1000,
       });
 
@@ -156,7 +157,8 @@ module.exports = {
         // set verified token to cookie
         res.cookie('verifiedToken', verifiedToken, {
           httpOnly: true,
-          sameSite: 'Lax',
+          sameSite: 'none',
+          secure: true,
           maxAge: 10 * 60 * 1000,
         });
 
@@ -180,7 +182,7 @@ module.exports = {
       // assigning refresh token in http-only cookie
       res.cookie('authorization', refreshToken, {
         httpOnly: true,
-        sameSite: 'Lax',
+        // sameSite: 'Lax',
         maxAge: 24 * 60 * 60 * 1000,
       });
 
@@ -245,7 +247,7 @@ module.exports = {
         // set verified token to cookie
         res.cookie('verifiedToken', updateVerifiedToken, {
           httpOnly: true,
-          sameSite: 'Lax',
+          // sameSite: 'Lax',
           maxAge: 10 * 60 * 1000,
         });
 
@@ -366,8 +368,11 @@ module.exports = {
           });
         }
 
+        // get user
+        const user = await getUserByEmailOrPhone(decodedToken.email);
+
         // generate new access token
-        const accessToken = generateToken({ email: decodedToken.email }, '10m');
+        const accessToken = generateToken({ id: user.id, email: decodedToken.email }, '10m');
 
         return res.status(200).json({
           status: true,
@@ -448,7 +453,7 @@ module.exports = {
 
           res.cookie('resetRequest', resetTokenExist.token, {
             httpOnly: true,
-            sameSite: 'Lax',
+            // sameSite: 'Lax',
             maxAge: resetTokenExist.exp - currentTimeReset,
           });
 
@@ -469,7 +474,7 @@ module.exports = {
       // set reset token to cookie
       res.cookie('resetRequest', resetToken, {
         httpOnly: true,
-        sameSite: 'Lax',
+        // sameSite: 'Lax',
         maxAge: 10 * 60 * 1000,
       });
 

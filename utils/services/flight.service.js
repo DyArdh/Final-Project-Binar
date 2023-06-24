@@ -45,7 +45,7 @@ module.exports = {
         arrival_airport.city arrival_airport_city,
         arrival_airport.country arrival_airport_country,
         arrival_airport.is_international arrival_airport_international,
-        classes.name class,
+        classes.name as class,
         classes.seat_capacity,
         airlines.name airline_name,
         airlines.logo_url,
