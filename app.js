@@ -17,7 +17,13 @@ const { PORT } = process.env;
 
 // middlewares
 app.use(rateLimit(limiterHandler));
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000' || process.env.FE_ORIGIN,
+    credentials: true,
+    // eslint-disable-next-line comma-dangle
+  })
+);
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,7 +38,7 @@ app.use(indexRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-app.listen(PORT || 3000, '0.0.0.0', () => {
+app.listen(PORT || 8080, '0.0.0.0', () => {
   // eslint-disable-next-line no-console
-  console.log(`Running on port ${PORT || 3000}`);
+  console.log(`Running on port ${PORT || 8080}`);
 });
