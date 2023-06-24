@@ -22,6 +22,7 @@ const {
   getUserByEmail,
   getResetToken,
   createResetToken,
+  updateResetTokenExp,
 } = require('../utils/services/user.service');
 
 // environments
@@ -186,64 +187,61 @@ module.exports = {
 
   resendOTP: async (req, res, next) => {
     try {
-      // check cookie
-      if (req.cookies?.verifiedToken) {
-        // destructuring token from cookie
-        const { verifiedToken } = req.cookies;
+      const { token } = req.query;
 
-        // verify token
-        const decodedToken = verifyToken(verifiedToken);
-
-        if (decodedToken.error) {
-          return res.status(406).json({
-            status: false,
-            message: 'Unauthorized!',
-            data: null,
-          });
-        }
-
-        // find user
-        const user = await getUserByEmail(decodedToken.email);
-
-        // if user already active
-        if (user.is_active) {
-          return res.status(401).json({
-            status: false,
-            message: 'Unauthorized!',
-            data: null,
-          });
-        }
-
-        // gen otp and update exp
-        const otp = generateOTP();
-        const expiredDate = new Date(Date.now() + 10 * 60000);
-
-        await updateUserByEmail(user.email, { otp, activation_exp: expiredDate });
-
-        // send email otp to client
-        const htmlOtp = await nodemailerLib.getHtml('otp-message.ejs', {
-          user: { otp },
-        });
-        nodemailerLib.sendEmail(user.email, 'OTP Verification', htmlOtp);
-
-        // create token for verified otp (10 minutes)
-        const updateVerifiedToken = generateToken({ email: user.email }, '10m');
-
-        // the token is sent directly to the client
-        return res.status(200).json({
-          status: true,
-          message: 'success!',
-          data: {
-            verifiedToken: updateVerifiedToken,
-          },
+      if (!token) {
+        return res.status(406).json({
+          status: false,
+          message: 'Unauthorized!',
+          data: null,
         });
       }
 
-      // else
-      return res.status(406).json({
-        status: false,
-        message: 'Unauthorized!',
-        data: null,
+      // verify token
+      const decodedToken = verifyToken(token);
+
+      if (decodedToken.error) {
+        return res.status(406).json({
+          status: false,
+          message: 'Unauthorized!',
+          data: null,
+        });
+      }
+
+      // find user
+      const user = await getUserByEmail(decodedToken.email);
+
+      // if user already active
+      if (user.is_active) {
+        return res.status(401).json({
+          status: false,
+          message: 'Unauthorized!',
+          data: null,
+        });
+      }
+
+      // gen otp and update exp
+      const otp = generateOTP();
+      const expiredDate = new Date(Date.now() + 10 * 60000);
+
+      await updateUserByEmail(user.email, { otp, activation_exp: expiredDate });
+
+      // send email otp to client
+      const htmlOtp = await nodemailerLib.getHtml('otp-message.ejs', {
+        user: { otp },
+      });
+      nodemailerLib.sendEmail(user.email, 'OTP Verification', htmlOtp);
+
+      // create token for verified otp (10 minutes)
+      const updateVerifiedToken = generateToken({ email: user.email }, '10m');
+
+      // the token is sent directly to the client
+      return res.status(200).json({
+        status: true,
+        message: 'success!',
+        data: {
+          verifiedToken: updateVerifiedToken,
+        },
       });
     } catch (error) {
       next(error);
@@ -253,76 +251,71 @@ module.exports = {
 
   verifiedOTP: async (req, res, next) => {
     try {
-      // check cookie
-      if (req.cookies?.verifiedToken) {
-        // destructuring token from cookie
-        const { verifiedToken } = req.cookies;
-        const { error, value } = otpValidationSchema.validate(req.body);
+      const { verifiedToken } = req.body;
 
-        // verify token
-        const decodedToken = verifyToken(verifiedToken);
-
-        if (decodedToken.error) {
-          return res.status(406).json({
-            status: false,
-            message: 'Unauthorized!',
-            data: null,
-          });
-        }
-
-        // check if input error
-        if (error) {
-          return res.status(400).json({
-            status: false,
-            message: error.details[0].message,
-            data: null,
-          });
-        }
-
-        // find user
-        const user = await getUserByEmail(decodedToken.email);
-
-        if (user.is_active) {
-          return res.status(401).json({
-            status: false,
-            message: 'Unauthorized!',
-            data: null,
-          });
-        }
-
-        // Use the validated data (value) for further processing
-        const { otp } = value;
-
-        // validate user otp
-        if (otp !== user.otp) {
-          return res.status(400).json({
-            status: false,
-            message: 'wrong otp code!',
-            data: null,
-          });
-        }
-
-        // update is_active
-        await updateUserByEmail(user.email, { is_active: true });
-
-        // send email
-        const htmlWelcome = await nodemailerLib.getHtml('welcome-message.ejs', {});
-        nodemailerLib.sendEmail(user.email, 'Welcome to SkyPass!', htmlWelcome);
-
-        // delete cookies
-        res.clearCookie('verifiedToken');
-
-        return res.status(200).json({
-          status: true,
-          message: 'success!',
+      if (!verifiedToken) {
+        return res.status(406).json({
+          status: false,
+          message: 'Unauthorized!',
           data: null,
         });
       }
 
-      // else
-      return res.status(406).json({
-        status: false,
-        message: 'Unauthorized!',
+      // verify token
+      const decodedToken = verifyToken(verifiedToken);
+
+      if (decodedToken.error) {
+        return res.status(406).json({
+          status: false,
+          message: 'Unauthorized!',
+          data: null,
+        });
+      }
+
+      const { error, value } = otpValidationSchema.validate(req.body);
+
+      // check if input error
+      if (error) {
+        return res.status(400).json({
+          status: false,
+          message: error.details[0].message,
+          data: null,
+        });
+      }
+
+      // find user
+      const user = await getUserByEmail(decodedToken.email);
+
+      if (user.is_active) {
+        return res.status(401).json({
+          status: false,
+          message: 'Unauthorized!',
+          data: null,
+        });
+      }
+
+      // Use the validated data (value) for further processing
+      const { otp } = value;
+
+      // validate user otp
+      if (otp !== user.otp) {
+        return res.status(400).json({
+          status: false,
+          message: 'wrong otp code!',
+          data: null,
+        });
+      }
+
+      // update is_active
+      await updateUserByEmail(user.email, { is_active: true });
+
+      // send email
+      const htmlWelcome = await nodemailerLib.getHtml('welcome-message.ejs', {});
+      nodemailerLib.sendEmail(user.email, 'Welcome to SkyPass!', htmlWelcome);
+
+      return res.status(200).json({
+        status: true,
+        message: 'success!',
         data: null,
       });
     } catch (error) {
@@ -333,42 +326,39 @@ module.exports = {
 
   refreshToken: async (req, res, next) => {
     try {
-      // check cookie
-      if (req.cookies?.authorization) {
-        // destructuring refreshToken from cookie
-        const refreshToken = req.cookies.authorization;
+      const { refreshToken } = req.body;
 
-        // verify token
-        const decodedToken = verifyToken(refreshToken, REFRESH_SECRET_KEY);
-
-        if (decodedToken.error) {
-          return res.status(406).json({
-            status: false,
-            message: 'Unauthorized!',
-            data: null,
-          });
-        }
-
-        // get user
-        const user = await getUserByEmailOrPhone(decodedToken.email);
-
-        // generate new access token
-        const accessToken = generateToken({ id: user.id, email: decodedToken.email }, '10m');
-
-        return res.status(200).json({
-          status: true,
-          message: 'success!',
-          data: {
-            access_token: accessToken,
-          },
+      if (!refreshToken) {
+        return res.status(406).json({
+          status: false,
+          message: 'Unauthorized!',
+          data: null,
         });
       }
 
-      // else
-      return res.status(406).json({
-        status: false,
-        message: 'Unauthorized!',
-        data: null,
+      // verify token
+      const decodedToken = verifyToken(refreshToken, REFRESH_SECRET_KEY);
+
+      if (decodedToken.error) {
+        return res.status(406).json({
+          status: false,
+          message: 'Unauthorized!',
+          data: null,
+        });
+      }
+
+      // get user
+      const user = await getUserByEmailOrPhone(decodedToken.email);
+
+      // generate new access token
+      const accessToken = generateToken({ id: user.id, email: decodedToken.email }, '10m');
+
+      return res.status(200).json({
+        status: true,
+        message: 'success!',
+        data: {
+          access_token: accessToken,
+        },
       });
     } catch (error) {
       next(error);
@@ -414,7 +404,7 @@ module.exports = {
       }
 
       // create reset password token and exp
-      const resetToken = generateToken({ email: user.email }, '10m');
+      const resetToken = generateToken({ email: user.email, userId: user.id }, '10m');
       const expiredDate = new Date(Date.now() + 10 * 60000);
       const htmlReset = await nodemailerLib.getHtml('reset-password-message.ejs', {
         user: { name: user.name, resetLink: process.env.RESETPW_URL || 'google.com' },
@@ -433,7 +423,7 @@ module.exports = {
           const currentTimeReset = new Date().getTime();
 
           // the token is sent directly to the client
-          return res.status(200).json({
+          return res.status(202).json({
             status: true,
             message: 'link to reset password has been sent to the email client!',
             data: {
@@ -466,54 +456,66 @@ module.exports = {
 
   resetPassword: async (req, res, next) => {
     try {
-      // check cookie
-      if (req.cookies?.resetRequest) {
-        // destructuring token from cookie
-        const { resetRequest } = req.cookies;
-        const { error, value } = resetPasswordSchema.validate(req.body);
+      const { resetRequestToken } = req.body;
+      const { error, value } = resetPasswordSchema.validate(req.body);
 
-        // verify token
-        const decodedToken = verifyToken(resetRequest);
-
-        if (decodedToken.error) {
-          return res.status(406).json({
-            status: false,
-            message: 'Unauthorized!',
-            data: null,
-          });
-        }
-
-        // check if input error
-        if (error) {
-          return res.status(400).json({
-            status: false,
-            message: error.details[0].message,
-            data: null,
-          });
-        }
-
-        // Use the validated data (value) for further processing
-        // eslint-disable-next-line camelcase
-        const { password } = value;
-
-        // hash password
-        const hashPassword = await bcrypt.hash(password, await bcrypt.genSalt(10));
-
-        // update user
-        await updateUserByEmail(decodedToken.email, { password: hashPassword });
-
-        res.clearCookie('resetRequest');
-
-        return res.status(200).json({
-          status: true,
-          message: 'success!',
+      if (!resetRequestToken) {
+        return res.status(406).json({
+          status: false,
+          message: 'Unauthorized!',
           data: null,
         });
       }
-      // else
-      return res.status(406).json({
-        status: false,
-        message: 'Unauthorized!',
+
+      // verify token
+      const decodedToken = verifyToken(resetRequestToken);
+
+      if (decodedToken.error) {
+        return res.status(406).json({
+          status: false,
+          message: 'Unauthorized!',
+          data: null,
+        });
+      }
+
+      // check if input error
+      if (error) {
+        return res.status(400).json({
+          status: false,
+          message: error.details[0].message,
+          data: null,
+        });
+      }
+
+      // check exp reset password
+      const resetTokenExp = await getResetToken(decodedToken.userId);
+
+      const now = new Date();
+
+      if (now > resetTokenExp.exp) {
+        return res.status(406).json({
+          status: false,
+          message: 'token has expired!',
+          data: null,
+        });
+      }
+
+      // Use the validated data (value) for further processing
+      // eslint-disable-next-line camelcase
+      const { password } = value;
+
+      // hash password
+      const hashPassword = await bcrypt.hash(password, await bcrypt.genSalt(10));
+
+      // update user
+      await updateUserByEmail(decodedToken.email, { password: hashPassword });
+
+      // update exp reset password
+      await updateResetTokenExp(resetRequestToken);
+
+      return res.status(200).json({
+        status: true,
+        message: 'success!',
         data: null,
       });
     } catch (error) {
