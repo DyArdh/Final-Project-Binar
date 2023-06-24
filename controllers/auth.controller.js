@@ -89,7 +89,8 @@ module.exports = {
       // set verified token to cookie
       res.cookie('verifiedToken', verifiedToken, {
         httpOnly: true,
-        // sameSite: 'Lax',
+        secure: process.env.SECURE || false,
+        sameSite: 'None',
         maxAge: 10 * 60 * 1000,
       });
 
@@ -156,7 +157,8 @@ module.exports = {
         // set verified token to cookie
         res.cookie('verifiedToken', verifiedToken, {
           httpOnly: true,
-          // sameSite: 'Lax',
+          secure: process.env.SECURE || false,
+          sameSite: 'None',
           maxAge: 10 * 60 * 1000,
         });
 
@@ -180,7 +182,8 @@ module.exports = {
       // assigning refresh token in http-only cookie
       res.cookie('authorization', refreshToken, {
         httpOnly: true,
-        // sameSite: 'Lax',
+        secure: process.env.SECURE || false,
+        sameSite: 'None',
         maxAge: 24 * 60 * 60 * 1000,
       });
 
@@ -245,7 +248,8 @@ module.exports = {
         // set verified token to cookie
         res.cookie('verifiedToken', updateVerifiedToken, {
           httpOnly: true,
-          // sameSite: 'Lax',
+          secure: process.env.SECURE || false,
+          sameSite: 'None',
           maxAge: 10 * 60 * 1000,
         });
 
@@ -451,7 +455,8 @@ module.exports = {
 
           res.cookie('resetRequest', resetTokenExist.token, {
             httpOnly: true,
-            // sameSite: 'Lax',
+            secure: process.env.SECURE || false,
+            sameSite: 'None',
             maxAge: resetTokenExist.exp - currentTimeReset,
           });
 
@@ -472,7 +477,8 @@ module.exports = {
       // set reset token to cookie
       res.cookie('resetRequest', resetToken, {
         httpOnly: true,
-        // sameSite: 'Lax',
+        secure: process.env.SECURE || false,
+        sameSite: 'None',
         maxAge: 10 * 60 * 1000,
       });
 
