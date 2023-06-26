@@ -13,7 +13,7 @@ const authMiddleware = (req, res, next) => {
       if (err) {
         return res.status(403).json({
           status: false,
-          message: 'Forbiden Access!',
+          message: err.message,
           data: null,
         });
       }
