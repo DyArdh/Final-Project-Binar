@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-const { Flight } = require('../../db/models');
 const { op, queryTypes } = require('../../external/database');
 
 module.exports = {
@@ -89,7 +88,50 @@ module.exports = {
   },
 
   getFlightById: async (flightId) => {
-    const flight = await Flight.findOne({ where: { id: flightId } });
+    const query = `
+    SELECT
+        "Flights".id,
+        "Flights".departure_time,
+        "Flights".arrival_time,
+        "Flights".departure_date,
+        "Flights".arrival_date,
+        "Flights".price,
+        "Flights".departure_terminal_name,
+        "Flights".formatted_duration duration,
+        "Flights".flight_number,
+        departure_airport.airport_code departure_airport_code,
+        departure_airport.name departure_airport,
+        departure_airport.continent departure_airport_continent,
+        departure_airport.city departure_airport_city,
+        departure_airport.country departure_airport_country,
+        departure_airport.is_international departure_airport_international,
+        arrival_airport.airport_code arrival_airport_code,
+        arrival_airport.name arrival_airport,
+        arrival_airport.continent arrival_airport_continent,
+        arrival_airport.city arrival_airport_city,
+        arrival_airport.country arrival_airport_country,
+        arrival_airport.is_international arrival_airport_international,
+        classes.name as class,
+        classes.seat_capacity,
+        airlines.name airline_name,
+        airlines.logo_url,
+        airlines.airline_code,
+        information_flight.baggage_capacity,
+        information_flight.cabin_capacity,
+        information_flight.flight_entertainment,
+        type_flight.name type_flight
+    FROM
+        "Flights"
+        INNER JOIN "Classes" classes ON "Flights".class_id = classes.id
+        INNER JOIN "Airlines" airlines ON "Flights".airline_id = airlines.id
+        INNER JOIN "Airports" departure_airport ON "Flights".departure_airport_code = departure_airport.airport_code
+        INNER JOIN "Airports" arrival_airport ON "Flights".arrival_airport_code = arrival_airport.airport_code
+        INNER JOIN "Information_Flights" information_flight ON "Flights".information_flights_id = information_flight.id
+        INNER JOIN "Type_Flights" type_flight ON "Flights".type_flight_id = type_flight.id
+    WHERE
+    "Flights".id = ${flightId}
+    `;
+    const flight = await op.query(query, { type: queryTypes.SELECT });
 
     return flight;
   },
