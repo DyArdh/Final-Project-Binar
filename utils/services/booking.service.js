@@ -99,45 +99,49 @@ module.exports = {
   getBookingWithBookingCode: async (userId, bookingCode) => {
     let query = `
     SELECT 
-    "Bookings"."booking_code",
-    "Flights"."departure_time",
-    "Flights"."arrival_time",
-    "Flights"."departure_date",
-    "Flights"."arrival_date",
-    "Flights"."flight_number",
-    "Flights"."price",
-    "Flights"."departure_terminal_name",
-    "Flights"."formatted_duration",
-    "Airlines"."name" AS "airline_name",
-    "Airlines"."logo_url",
-    "Airlines"."airline_code",
-    "Airports"."airport_code",
-    "Airports"."name" AS "airport_name",
-    "Airports"."city",
-    "Classes"."name" AS "class_name",
-    (SELECT JSON_AGG(
-        JSON_BUILD_OBJECT(
-          'name', "Passengers"."name",
-          'id', "Passengers"."id",
-          'gender', "Passengers"."gender"
+      "Bookings"."booking_code",
+      "Flights"."departure_time",
+      "Flights"."arrival_time",
+      "Flights"."departure_date",
+      "Flights"."arrival_date",
+      "Flights"."flight_number",
+      "Flights"."price",
+      "Flights"."departure_terminal_name",
+      "Flights"."formatted_duration",
+      "Airlines"."name" AS "airline_name",
+      "Airlines"."logo_url",
+      "Airlines"."airline_code",
+      "Airports"."airport_code",
+      "Airports"."name" AS "departure_airport_name",
+      "Airports"."city" AS "departure_city",
+      "ArrivalAirports"."airport_code" AS "arrival_airport_code",
+      "ArrivalAirports"."name" AS "arrival_airport_name",
+      "ArrivalAirports"."city" AS "arrival_city",
+      "Classes"."name" AS "class_name",
+      (SELECT JSON_AGG(
+          JSON_BUILD_OBJECT(
+            'name', "Passengers"."name",
+            'id', "Passengers"."id",
+            'gender', "Passengers"."gender"
+          )
         )
-      )
-      FROM "Passengers"
-      WHERE "Passengers"."booking_code" = "Bookings"."booking_code"
-      AND "Passengers"."passenger_type" != 'baby'
-    ) AS "passengers",
-    "Bookings"."total_price",
-    "Bookings"."tax",
-    COUNT(CASE WHEN "Passengers"."passenger_type" = 'baby' THEN 1 END) AS "baby_count",
-    COUNT(CASE WHEN "Passengers"."passenger_type" = 'adult' THEN 1 END) AS "adult_count",
-    COUNT(CASE WHEN "Passengers"."passenger_type" = 'child' THEN 1 END) AS "child_count",
-    "Bookings"."status",
-    "Bookings"."payment_status",
-    "Type_Flights"."name" AS "type_flight"
+        FROM "Passengers"
+        WHERE "Passengers"."booking_code" = "Bookings"."booking_code"
+        AND "Passengers"."passenger_type" != 'baby'
+      ) AS "passengers",
+      "Bookings"."total_price",
+      "Bookings"."tax",
+      COUNT(CASE WHEN "Passengers"."passenger_type" = 'baby' THEN 1 END) AS "baby_count",
+      COUNT(CASE WHEN "Passengers"."passenger_type" = 'adult' THEN 1 END) AS "adult_count",
+      COUNT(CASE WHEN "Passengers"."passenger_type" = 'child' THEN 1 END) AS "child_count",
+      "Bookings"."status",
+      "Bookings"."payment_status",
+      "Type_Flights"."name" AS "type_flight"
     FROM "Bookings"
     INNER JOIN "Flights" ON "Bookings"."flight_id" = "Flights"."id"
     INNER JOIN "Airlines" ON "Flights"."airline_id" = "Airlines"."id"
     INNER JOIN "Airports" ON "Flights"."departure_airport_code" = "Airports"."airport_code"
+    INNER JOIN "Airports" AS "ArrivalAirports" ON "Flights"."arrival_airport_code" = "ArrivalAirports"."airport_code"
     INNER JOIN "Classes" ON "Flights"."class_id" = "Classes"."id"
     INNER JOIN "Passengers" ON "Bookings"."booking_code" = "Passengers"."booking_code"
     INNER JOIN "Type_Flights" ON "Flights"."type_flight_id" = "Type_Flights"."id"
@@ -166,6 +170,9 @@ module.exports = {
     "Airports"."airport_code",
     "Airports"."name",
     "Airports"."city",
+    "ArrivalAirports"."airport_code",
+    "ArrivalAirports"."name",
+    "ArrivalAirports"."city",
     "Classes"."name",
     "Bookings"."total_price",
     "Bookings"."tax",

@@ -176,7 +176,7 @@ module.exports = {
         message: 'success!',
         data: {
           access_token: accessToken,
-          refres_token: refreshToken,
+          refresh_token: refreshToken,
         },
       });
     } catch (error) {
