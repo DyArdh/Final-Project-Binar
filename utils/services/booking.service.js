@@ -180,7 +180,7 @@ module.exports = {
     "Bookings"."status",
     "Bookings"."payment_status",
     "Type_Flights"."name"
-    ORDER BY "Bookings"."updatedAt DESC"`;
+    ORDER BY "Bookings"."updatedAt" DESC`;
 
     const bookings = await op.query(query, { bind: params, type: queryTypes.SELECT });
 
