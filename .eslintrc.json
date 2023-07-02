@@ -6,12 +6,21 @@
   },
   "extends": "airbnb-base",
   "overrides": [],
-  "ignorePatterns": ["**/node_modules", "**/db/models", "**/db/migrations", "**/db/seeders"],
+  "ignorePatterns": [
+    "**/node_modules",
+    "**/db/models",
+    "**/db/migrations",
+    "**/db/seeders"
+  ],
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "parserOptions": {
+      "globalReturn": true
+    }
   },
   "rules": {
     "linebreak-style": 0,
-    "import/no-extraneous-dependencies": 0
+    "import/no-extraneous-dependencies": 0,
+    "object-curly-newline": "off"
   }
 }
