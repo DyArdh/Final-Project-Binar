@@ -145,7 +145,8 @@ module.exports = {
     INNER JOIN "Classes" ON "Flights"."class_id" = "Classes"."id"
     INNER JOIN "Passengers" ON "Bookings"."booking_code" = "Passengers"."booking_code"
     INNER JOIN "Type_Flights" ON "Flights"."type_flight_id" = "Type_Flights"."id"
-    WHERE "Bookings"."user_id" = $1`;
+    WHERE "Bookings"."user_id" = $1
+    `;
 
     const params = [userId];
 
@@ -178,7 +179,8 @@ module.exports = {
     "Bookings"."tax",
     "Bookings"."status",
     "Bookings"."payment_status",
-    "Type_Flights"."name"`;
+    "Type_Flights"."name"
+    ORDER BY "Bookings"."updatedAt" DESC`;
 
     const bookings = await op.query(query, { bind: params, type: queryTypes.SELECT });
 
