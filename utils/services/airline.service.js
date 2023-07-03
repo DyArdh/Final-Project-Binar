@@ -4,6 +4,7 @@ module.exports = {
   getAirlines: async () => {
     const airlines = await Airline.findAll({
       attributes: ['name', 'logo_url', 'airline_code'],
+      order: [['name', 'ASC']],
     });
     return airlines;
   },
