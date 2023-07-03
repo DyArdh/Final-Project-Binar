@@ -8,6 +8,7 @@ module.exports = {
         user_id: userId,
       },
       limit,
+      order: [['createdAt', 'DESC']],
     });
     return notifications;
   },
